@@ -80,6 +80,7 @@ The script torch_class_gridsearch.py executes the main prediction pipeline in Ri
 RiskPath uses the GradientShap method from the captum library (https://captum.ai/) to compute feature importances on a per feature per time period level on the unseen test data using the training data as background. This helps determine which of your features are important predictors. These scores are also averaged across time periods for a single importance score per feature. The single importance score per feature results per model are recorded in target_importances.csv. The importance score per feature per time period results are in target_importancesTPs.csv. Riskpath also generates ROC curves  and Shapley value plots (with feature importances and the data averaged over time periods due to plot functions not supporting three dimensions) as zip files containing the per model res
 
 Runtime parameters:<br>
+
     • input_dir - path to files created by Matrix_Assembly
     • target - target to predict
     • output_dir - directory to save results
