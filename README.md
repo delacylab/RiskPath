@@ -55,8 +55,8 @@ Typically, feature filtering is performed in the training partition with the res
     • TestLabel - label used in your test set filenames e.g. rep in examples here.
     • lasso_threshold - A float value that sets the threshold for determining lasso importance.
     • perc_Boruta - An integer value that determines Boruta strictness (values range from 1-100).
-    • Run with:
-    • python Feature_Filtering.py path/to/input/features directory/to/save/results path/to/target/file target True|False LASSO|boruta|both primary_key trainLabel testLabel lasso_threshold perc_Boruta
+    
+Run with: **python Feature_Filtering.py path/to/input/features directory/to/save/results path/to/target/file target True|False LASSO|boruta|both primary_key trainLabel testLabel lasso_threshold perc_Boruta**
 
 # Data Preparation for Deep Learning
 
@@ -71,9 +71,9 @@ Runtime parameters:<br>
     • TrainLabel – label used for your training data in filenames.
     • TestLabel - label used in your test set filenames
     • output_dir – Output directory prefix. Similar to the last step, this parameter is a root directory name that will have the selected time periods and dimension appended to the end of the directory name. Inside that directory, subdirectories will be created for each target.
-    • Run with:
-    • python Matrix_Assembly.py path/to/_AllTPs/directory/from/last/step path/with/prefix/to/target_csv target primary_key comma_separated_list_of_numerical_time_periods trainLabel testLabel
-    • As an example, our running of this program looks like python Matrix_Assembly.py Filter_Output_boruta_AllTPs targets_after_balancing_ hypertension IDNO 0,1,2,3,4,5,6,7,8,9 train test Final_Matrices
+
+Run with: **python Matrix_Assembly.py path/to/\_AllTPs/directory/from/last/step path/with/prefix/to/target_csv target primary_key comma_separated_list_of_numerical_time_periods trainLabel testLabel<br>**
+As an example, our running of this program looks like **python Matrix_Assembly.py Filter_Output_boruta_AllTPs targets_after_balancing_ hypertension IDNO 0,1,2,3,4,5,6,7,8,9 train test Final_Matrices**<br>
 
 # Deep Learning
 The script torch_class_gridsearch.py executes the main prediction pipeline in RiskPath. RiskPath allows optimization of the topology of the embedded Long Short Term Memory deep learning algorithm. It does this via a grid search approach to examine the effect of varying with unit size (network width) of each layer where the minimum and maximum are runtime parameters.  For 3D matrices, we use a LSTM with 2 layers (if the bidirectional runtime parameter == True, then those layers will be bidirectional for a total of 4 layers). For 2D matrices, we use a simple deep learning feedforward network with 3 layers. Both are implemented in Pytorch with the AdamW optimizer. kfold validation is implemented for training with k specified as a runtime parameter and early stopping based on validation loss inside the kfold with maximum epochs = 150 as the default behavior. 
@@ -93,9 +93,9 @@ Runtime parameters:<br>
     • preset_feature_list – Set to true to use a specific feature list (must be placed in code). False to use all features.
     • TrainLabel - label used for your training data in filenames.
     • TestLabel - label used for your test data in filenames.
-    • Run with:
-    • python torch_class_gridsearch.py path/to/features/from/MatrixAssembly target output_directory numberOfGPUs bidir k layer_size_min layer_size_max False trainLabel testLabel
-    • An example from our work is python torch_class_gridsearch.py ../CHS_10year_Cohort1/Final_lasso_0-1-2-3-4-5-6-7-8-9_3D HYPER_balanced ../CHS_10year_Cohort1/Results_3D_lasso 2 True 10 5 1200 False train test
+
+Run with: **python torch_class_gridsearch.py path/to/features/from/MatrixAssembly target output_directory numberOfGPUs bidir k layer_size_min layer_size_max False trainLabel testLabel**<br>
+An example from our work is **python torch_class_gridsearch.py ../CHS_10year_Cohort1/Final_lasso_0-1-2-3-4-5-6-7-8-9_3D HYPER_balanced ../CHS_10year_Cohort1/Results_3D_lasso 2 True 10 5 1200 False train test**
     
 Outputs
 RiskPath generates the following output:
