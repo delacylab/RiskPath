@@ -27,7 +27,7 @@ RiskPath offers feature filtering to obtain a selected subset of important featu
 Finer feature filtering is also offered using different methods:
 
 [LASSOCV](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LassoCV.html) from scikit-learn<br>
-[Boruta](https://github.com/scikit-learn-contrib/boruta_py), used for nonlinear feature filtering<br>
+[Boruta](https://github.com/scikit-learn-contrib/boruta_py) used for nonlinear feature filtering<br>
 Union of LASSOCV and Boruta. <br>
 
 While each method allows various runtime parameters, we only highlight those that are more commonly used to control the strictness of feature selection in practice.
