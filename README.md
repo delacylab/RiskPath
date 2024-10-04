@@ -55,7 +55,8 @@ Typically, feature filtering is performed in the training partition with the res
     • TestLabel - label used in your test set filenames e.g. rep in examples here.
     • lasso_threshold - A float value that sets the threshold for determining lasso importance.
     • perc_Boruta - An integer value that determines Boruta strictness (values range from 1-100).
-    • Run with: python Feature_Filtering.py path/to/input/features directory/to/save/results path/to/target/file target True|False LASSO|boruta|both primary_key trainLabel testLabel lasso_threshold perc_Boruta
+    • Run with:
+    • python Feature_Filtering.py path/to/input/features directory/to/save/results path/to/target/file target True|False LASSO|boruta|both primary_key trainLabel testLabel lasso_threshold perc_Boruta
 
 # Data Preparation for Deep Learning
 
@@ -92,7 +93,6 @@ Runtime parameters:<br>
     • preset_feature_list – Set to true to use a specific feature list (must be placed in code). False to use all features.
     • TrainLabel - label used for your training data in filenames.
     • TestLabel - label used for your test data in filenames.
-    • Input: 
     • Run with:
     • python torch_class_gridsearch.py path/to/features/from/MatrixAssembly target output_directory numberOfGPUs bidir k layer_size_min layer_size_max False trainLabel testLabel
     • An example from our work is python torch_class_gridsearch.py ../CHS_10year_Cohort1/Final_lasso_0-1-2-3-4-5-6-7-8-9_3D HYPER_balanced ../CHS_10year_Cohort1/Results_3D_lasso 2 True 10 5 1200 False train test
