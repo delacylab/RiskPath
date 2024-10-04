@@ -1,6 +1,5 @@
 import pandas as pd
-import  numpy as np
-#from sklearn import linear_model
+import numpy as np
 import pickle
 import os
 import glob
@@ -24,7 +23,7 @@ parser.add_argument('lassoBorutaBoth', help='should be in [lasso,boruta,both]')
 parser.add_argument('IDKey', help='primary key of DataFrame e.g. src_subject_id')
 parser.add_argument('trainLabel', help='common label found in training set filenames')
 parser.add_argument('testLabel', help='common label found in test set filenames')
-parser.add_argument('lasso_threshold', help='lasso threshold')
+parser.add_argument('lasso_threshold', nargs='?', default=0.0, help='lasso threshold')
 args = parser.parse_args()
 input_dir = args.inputdir
 output_dir = args.output_dir
