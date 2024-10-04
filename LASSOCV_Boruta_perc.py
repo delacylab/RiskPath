@@ -13,7 +13,7 @@ import torch
 ########################################################################################################################
 
 
-def feature_preprocessing(df_X, df_y, indicator_col_name, target_col_name, classification=True,
+def feature_preprocessing(df_X, df_y, indicator_col_name, target_col_name, lasso_threshold=0.0, classification=True,
                           null_threshold=0.35, var_threshold=0.05,
                           alpha_range_LASSO=None, n_alphas_LASSO=100, max_iter_LASSO=1000, cv_LASSO=5,
                           selection_LASSO='random', max_depth_forest=7, bootstrap_forest=True, alpha_Boruta=0.05,
@@ -178,7 +178,7 @@ def feature_preprocessing(df_X, df_y, indicator_col_name, target_col_name, class
     lassocollist = []
     borutacollist = []
     if lassoBorutaBoth == 'lasso' or lassoBorutaBoth == 'both':
-       lassocollist = df_coef[df_coef['Lasso_Coeff'] != 0]
+       lassocollist = df_coef[df_coef['Lasso_Coeff'].abs() > lasso_threshold]
        lassocollist = lassocollist['Feature'].tolist()
     union_LASSO_Boruta = np.unique(lassocollist + list(B_feat_set))
     #del_row_list is used to remove features from db_coef where importance == 0
