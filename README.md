@@ -60,7 +60,7 @@ Run with: **python Feature_Filtering.py path/to/input/features directory/to/save
 
 # Data Preparation for Deep Learning
 
-The script Matrix_Assembly.py is required to prepare the feature datasets, with or without features filtered, for subsequent deep learning processes. It concatenates all the feature datasets (in different time periods) into two different matrices, one in 2-dimensional (2D) and one in 3-dimensional (3D). The 2D case is a straightforward horizontal concatenation of the features across different feature datasets. In contrast, the 3D case makes use of the assumption that if a feature is important in any time period, it is important in all time periods. Thus, the resultant 3D matrix contains features that are selected in at least one time period. But if it was not present in another time period, RiskPath will fill the missing value with 1.
+The script Matrix_Assembly.py is required to prepare the feature datasets, with or without features filtered, for subsequent deep learning processes. It concatenates all the feature datasets (in different time periods) into two different matrices, one in 2-dimensional (2D) and one in 3-dimensional (3D). The 2D case is a straightforward horizontal concatenation of the features across different feature datasets. In contrast, the 3D case makes use of the assumption that if a feature is important in any time period, it is important in all time periods. Thus, the resultant 3D matrix contains features that are selected in at least one time period. But if it was not present in another time period, RiskPath will fill the missing value with 1.<br>
 Runtime parameters:<br>
 
     • input_dir – This should be a path to the AllTPs directory created in the previous step.
