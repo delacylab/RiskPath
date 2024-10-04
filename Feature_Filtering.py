@@ -23,7 +23,8 @@ parser.add_argument('lassoBorutaBoth', help='should be in [lasso,boruta,both]')
 parser.add_argument('IDKey', help='primary key of DataFrame e.g. src_subject_id')
 parser.add_argument('trainLabel', help='common label found in training set filenames')
 parser.add_argument('testLabel', help='common label found in test set filenames')
-parser.add_argument('lasso_threshold', nargs='?', default=0.0, help='lasso threshold')
+parser.add_argument('lasso_threshold', help='lasso threshold')
+parser.add_argument('perc_Boruta', help='perc parameter for Boruta algorithm')
 args = parser.parse_args()
 input_dir = args.inputdir
 output_dir = args.output_dir
@@ -35,6 +36,7 @@ IDKey = args.IDKey
 trainLabel = args.trainLabel
 testLabel = args.testLabel
 lasso_threshold = float(args.lasso_threshold)
+perc_Boruta = int(args.perc_Boruta)
 print('Running LBWrapper with parameters',args)
 assert c_or_r in ['True', 'False']
 c_or_r = c_or_r.lower() in ("yes", "true", "t", "1") #convert string to boolean
@@ -46,7 +48,7 @@ if not input_dir.endswith(os.path.sep):
 #The reverse here since this is a root name we will add to   
 if output_dir.endswith(os.path.sep):
    output_dir = output_dir[:-1]
-output_dir = output_dir + '_' + lassoBorutaBoth + str(lasso_threshold) + os.path.sep
+output_dir = output_dir + '_' + lassoBorutaBoth + '_L' + str(lasso_threshold) + '_B' + str(perc_Boruta) + os.path.sep
 output_importances_dir = output_dir.replace(lassoBorutaBoth, lassoBorutaBoth + '_Importances')
 output_allTPs_dir = output_dir.replace(lassoBorutaBoth, lassoBorutaBoth + '_AllTPs')
 if lassoBorutaBoth != 'None':
@@ -106,7 +108,9 @@ for target in target_list:
    
    if lassoBorutaBoth != 'None':
       DLFS_to_save = None
-      DLFS_to_save, df_coef = feature_preprocessing(newframe, newtarget, IDKey, target, classification=c_or_r, lassoBorutaBoth=lassoBorutaBoth, lasso_threshold=lasso_threshold) 
+      DLFS_to_save, df_coef = feature_preprocessing(newframe, newtarget, IDKey, target, classification=c_or_r, 
+                                                    lassoBorutaBoth=lassoBorutaBoth, lasso_threshold=lasso_threshold,
+                                                   perc_Boruta=perc_Boruta) 
       #DLFS_to_save is the original DataFrame (newframe) but subsetted with only the features flagged as important
       if DLFS_to_save is not None:
          print(afile,'Before Lasso/Boruta, dataframe shape=',newframe.shape[1], 'afterwards=',DLFS_to_save.shape[1])
